@@ -7,7 +7,7 @@ import { adminRouter } from "./Routes/AdminRoutes.js";
 const app=express();
 app.use(cors({
 	origin: ["http://127.0.0.1:5173"],
-	methods: ['GET', 'POST', 'PUT'],
+	methods: ['GET', 'POST', 'PUT', 'DELETE'],
 	credentials: true
 }))
 app.use(express.json())
