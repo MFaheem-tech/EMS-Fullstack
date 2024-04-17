@@ -15,7 +15,7 @@ router.post('/adminlogin', (req, res) => {
 		if (result.length>0) {
 			const email=result[0].email;
 			const token=jwt.sign(
-				{ role: "admin", email: email },
+				{ role: "admin", email: email, id: result[0].id },
 				"jwt_secret_key",
 				{ expiresIn: '1d' });
 			res.cookie('token', token)
@@ -160,6 +160,13 @@ router.get('/admin_records', (req, res) => {
 	conn.query(sql, (err, result) => {
 		if (err) return res.json({ Status: false, Error: "Query Error"+err })
 		return res.json({ Status: true, Result: result })
+	})
+})
+
+router.get('/logout', (req, res) => {
+	res.clearCookie('token')
+	return res.json({
+		Status: true,
 	})
 })
 
